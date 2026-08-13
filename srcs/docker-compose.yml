@@ -2,6 +2,9 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb
+    secrets:
+      - db_password
+      - db_root_password
     build:
       context: ./requirements/mariadb
       dockerfile: Dockerfile
@@ -15,11 +18,13 @@ services:
     expose:
       - "3306"
 
-
-
   wordpress:
     container_name: wordpress
     image: wordpress
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_sc_usr_password
     build:
       context: ./requirements/wordpress
       dockerfile: Dockerfile
@@ -70,3 +75,17 @@ volumes:
 networks:
   inception:
     driver: bridge
+
+# Chaque secret est monte dans le conteneur sous /run/secrets/<nom du secret>.
+# C'est le NOM DU SECRET qui donne le chemin, pas le nom du fichier.
+# Le chemin est ../secrets/ car ce fichier est dans srcs/ et le dossier
+# secrets/ se trouve a la racine du depot.
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_sc_usr_password:
+    file: ../secrets/wp_sc_usr_pasword.txt

@@ -16,13 +16,13 @@ until mysqladmin ping -h mariadb --silent; do
 done
 
 if ! wp core is-installed --path=/var/www/html --allow-root; then
-    wp core download --path=/var/www/html --locale=fr_FR --allow-root
+    wp core download --path=/var/www/html --allow-root
 
     wp config create \
         --path=/var/www/html \
         --dbname="${MARIADB_DATABASE}" \
         --dbuser="${MARIADB_USER}" \
-        --dbpass="${MARIADB_PASSWORD}" \
+        --dbpass="$(cat /run/secrets/db_password)" \
         --dbhost="mariadb:3306" \
         --allow-root
 
@@ -31,7 +31,7 @@ if ! wp core is-installed --path=/var/www/html --allow-root; then
         --url="https://${DOMAIN_NAME}" \
         --title="${WP_TITLE}" \
         --admin_user="${WP_ADMIN_USER}" \
-        --admin_password="${WP_ADMIN_PASSWORD}" \
+        --admin_password="$(cat /run/secrets/wp_admin_password)" \
         --admin_email="${WP_ADMIN_EMAIL}" \
         --allow-root
 
@@ -40,7 +40,7 @@ if ! wp core is-installed --path=/var/www/html --allow-root; then
         "${SECOND_WP_EMAIL}" \
         --path=/var/www/html \
         --role=editor \
-        --user_pass="${SECOND_WP_PASSWORD}" \
+        --user_pass="$(cat /run/secrets/wp_sc_usr_password)" \
         --allow-root
 else
     echo "[WP] already installed"

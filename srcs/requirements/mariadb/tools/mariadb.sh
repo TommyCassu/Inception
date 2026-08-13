@@ -9,9 +9,9 @@ if [ ! -d "${MARIADB_DATADIR}/mysql" ]; then
 
 
 cat > /tmp/init.sql << EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PASSWORD}';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$(cat /run/secrets/db_root_password)';
 CREATE DATABASE IF NOT EXISTS \`${MARIADB_DATABASE}\`;
-CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
+CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '$(cat /run/secrets/db_password)';
 GRANT ALL PRIVILEGES ON \`${MARIADB_DATABASE}\`.* TO '${MARIADB_USER}'@'%';
 EOF
 
