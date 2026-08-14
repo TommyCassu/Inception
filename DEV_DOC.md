@@ -67,7 +67,7 @@ Without this line nothing at `https://tcassu.42.fr` works
 │   ├── db_root_password.txt
 │   ├── db_password.txt
 │   ├── wp_admin_password.txt
-│   └── wp_sc_usr_pasword.txt
+│   └── wp_sc_usr_password.txt
 └── srcs/
     ├── docker-compose.yml    3 services, 1 network, 2 named volumes, 4 secrets
     ├── .env                  non-sensitive settings — NEVER committed
@@ -155,7 +155,7 @@ mkdir -p secrets
 echo -n "your_root_password" > secrets/db_root_password.txt
 echo -n "your_db_password"   > secrets/db_password.txt
 echo -n "your_wp_admin_pw"   > secrets/wp_admin_password.txt
-echo -n "your_wp_user_pw"    > secrets/wp_sc_usr_pasword.txt
+echo -n "your_wp_user_pw"    > secrets/wp_sc_usr_password.txt
 ```
 
 `-n` avoids a trailing newline. (`$(cat …)` would strip it anyway, but the file stays
@@ -174,7 +174,7 @@ secrets:
   wp_admin_password:
     file: ../secrets/wp_admin_password.txt
   wp_sc_usr_password:
-    file: ../secrets/wp_sc_usr_pasword.txt
+    file: ../secrets/wp_sc_usr_password.txt
 ```
 
 > The **secret name** determines the mount path `/run/secrets/<name>` — not the file

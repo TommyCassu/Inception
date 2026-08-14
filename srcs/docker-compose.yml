@@ -62,24 +62,21 @@ volumes:
     driver: local
     driver_opts:
       type: none 
-      o: bind # Les Bind Mounts sont des volumes qui se montent sur un chemin d'accès à l'hôte, et ils peuvent être modifiés par d'autres processus en dehors de docker.
-      device: /home/tcassu/data/mariadb	#Ou stocker le dossier sur votre ordinateur en local\
+      o: bind 
+      device: /home/tcassu/data/mariadb	
   wordpress:
     driver: local
     driver_opts:
       type: none 
-      o: bind # Les Bind Mounts sont des volumes qui se montent sur un chemin d'accès à l'hôte, et ils peuvent être modifiés par d'autres processus en dehors de docker.
-      device: /home/tcassu/data/wordpress	#Ou stocker le dossier sur votre ordinateur en local
+      o: bind 
+      device: /home/tcassu/data/wordpress	
 
 
 networks:
   inception:
     driver: bridge
 
-# Chaque secret est monte dans le conteneur sous /run/secrets/<nom du secret>.
-# C'est le NOM DU SECRET qui donne le chemin, pas le nom du fichier.
-# Le chemin est ../secrets/ car ce fichier est dans srcs/ et le dossier
-# secrets/ se trouve a la racine du depot.
+
 secrets:
   db_password:
     file: ../secrets/db_password.txt

@@ -98,7 +98,7 @@ One file per password, containing only the value:
 | `secrets/db_root_password.txt` | the database root account |
 | `secrets/db_password.txt` | the database user WordPress connects with |
 | `secrets/wp_admin_password.txt` | the WordPress administrator (`tcassu`) |
-| `secrets/wp_sc_usr_pasword.txt` | the second WordPress user (`toto`) |
+| `secrets/wp_sc_usr_password.txt` | the second WordPress user (`toto`) |
 
 ```bash
 cat secrets/wp_admin_password.txt
