@@ -88,4 +88,4 @@ secrets:
   wp_admin_password:
     file: ../secrets/wp_admin_password.txt
   wp_sc_usr_password:
-    file: ../secrets/wp_sc_usr_pasword.txt
+    file: ../secrets/wp_sc_usr_password.txt
